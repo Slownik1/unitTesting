@@ -55,4 +55,13 @@ class MealTest {
 
 
     }
+    @Test
+    void exceptionShouldBeThrownIfDiscountIsHigherThanPrice(){
+
+        //GIVEN
+        Meal meal = new Meal(10, "Soup");
+
+        //THEN
+        assertThrows(IllegalArgumentException.class, ()->meal.getDiscountedPrice(20));
+    }
 }
