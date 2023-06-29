@@ -1,8 +1,10 @@
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.hamcrest.*;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 public class AccountTest {
 
@@ -48,6 +50,20 @@ public class AccountTest {
         //THEN
         assertNotNull(testAcount.getDefaulAdress());
 
+    }
+
+    @RepeatedTest(5)
+    void newAccountIsActiveWhenHaveAdress(){
+        //GIVEN
+        Adress adress = new Adress("main", "34/2");
+
+        //WHEN
+        Account account = new Account(adress);
+
+        //THEN
+        assumingThat(adress !=null, ()->{
+            assertTrue(account.isActive());
+        });
     }
 
 }

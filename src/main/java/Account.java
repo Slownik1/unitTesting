@@ -8,6 +8,14 @@ public class Account {
         this.defaulAdress = defaulAdress;
     }
 
+    public Account(Adress defaulAdress) {
+        this.defaulAdress = defaulAdress;
+        if(defaulAdress != null)
+            activate();
+        else
+            this.active=false;
+    }
+
     public Account(boolean active) {
         this.active = active;
     }
