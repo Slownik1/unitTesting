@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(BeforeAfterExtension.class)
 class OrderTest {
 
     private Order order;
