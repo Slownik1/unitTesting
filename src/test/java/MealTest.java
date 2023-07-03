@@ -1,14 +1,22 @@
+import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 class MealTest {
 
@@ -93,6 +101,44 @@ class MealTest {
         assertThat(name, containsString("burger"));
         assertThat(price, greaterThan(14));
 
+    }
+
+    @TestFactory
+    Collection<DynamicTest> dynamicTestCollection(){
+
+        return Arrays.asList(
+                dynamicTest("Test 1", ()->assertThat(5, lessThan(6))),
+                dynamicTest("test 2", ()->assertEquals(4,2*2)));
+    }
+
+    @TestFactory
+    Collection<DynamicTest> calculateMealPricec(){
+        Order order = new Order();
+        order.addNewMealToOrder(new Meal(22, "Soup", 2));
+        order.addNewMealToOrder(new Meal(35, "Spagetti", 1));
+        order.addNewMealToOrder(new Meal(8, "Water", 5));
+
+        Collection<DynamicTest> dynamicTests = new ArrayList<>();
+
+        for(int i=0; i<order.getMeals().size(); i++){
+
+            int price = order.getMeals().get(i).getPrice();
+            int qty = order.getMeals().get(i).getQty();
+
+            Executable executable=()->{
+                assertThat(calculatePrice(price, qty), lessThan(67));
+            };
+
+            String name = "Test:" + i;
+            DynamicTest dynamicTest = DynamicTest.dynamicTest(name, executable);
+            dynamicTests.add(dynamicTest);
+
+        }
+        return dynamicTests;
+    }
+
+    private int calculatePrice(int price, int quantity){
+        return price*quantity;
     }
 
 }
