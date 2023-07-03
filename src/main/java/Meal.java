@@ -4,6 +4,7 @@ public class Meal {
 
     private int price;
     private String name;
+    private int qty;
 
     @Override
     public String toString() {
@@ -19,6 +20,16 @@ public class Meal {
         if (o == null || getClass() != o.getClass()) return false;
         Meal meal = (Meal) o;
         return price == meal.price && Objects.equals(name, meal.name);
+    }
+
+    public Meal(int price, String name, int qty) {
+        this.price = price;
+        this.name = name;
+        this.qty = qty;
+    }
+
+    public int getQty() {
+        return qty;
     }
 
     @Override
