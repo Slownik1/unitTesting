@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.function.Executable;
@@ -111,6 +112,7 @@ class MealTest {
                 dynamicTest("test 2", ()->assertEquals(4,2*2)));
     }
 
+    @Tag("Test")
     @TestFactory
     Collection<DynamicTest> calculateMealPricec(){
         Order order = new Order();

@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -22,6 +23,7 @@ class OrderBackupTest {
         orderBackup.closeFile();
     }
 
+    @Tag("Test")
     @Test
     void backupOrderWithOneMeal() throws IOException {
 
